@@ -1,1 +1,26 @@
-<p>sidebar works!</p>
+<nav class="sidebar sidebar-offcanvas">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <div class="nav-link">
+                <div class="user-wrapper">
+                    <div class="profile-image">
+                        <img src="assets/images/faces/face1.jpg" alt="profile image">
+                    </div>
+                    <div class="text-wrapper">
+                        <p class="profile-name">Oscar Bautista</p>
+                        <div>
+                            <small class="designation text-muted">Desarrollador</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li *ngFor="let item of items" class="nav-item">
+            <a [routerLink]="item.url" class="nav-link" [ngClass]="{'cursor': item.cursor}">
+                <i class="menu-icon fa {{item.icon}}"></i>
+                <span class="menu-title">{{item.titulo}}</span>
+            </a>
+        </li>
+    </ul>
+</nav>
