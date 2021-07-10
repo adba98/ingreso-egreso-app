@@ -4,3 +4,4 @@ Projecto generado en [Angular CLI](https://github.com/angular/angular-cli) versi
 
 # Redux en Angular (NgRx)
 - [Firebase](https://github.com/angular/angularfire): ``ng add @angular/fire``
+- [SweetAlert2](https://sweetalert2.github.io/)
