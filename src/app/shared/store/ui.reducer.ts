@@ -6,13 +6,13 @@ export interface State {
 }
 
 export const initialState: State = {
-  isLoading: true,
+  isLoading: false,
 };
 
 const _uiReducer = createReducer(
   initialState,
-  on(isLoading, (state: any) => ({ ...state, isLoading: true })),
-  on(stopLoading, (state: any) => ({ ...state, isLoading: false }))
+  on(isLoading, (state: State) => ({ ...state, isLoading: true })),
+  on(stopLoading, (state: State) => ({ ...state, isLoading: false }))
 );
 
 export function uiReducer(state: State | undefined, action: Action) {
