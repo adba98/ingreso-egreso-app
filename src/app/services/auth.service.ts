@@ -13,6 +13,7 @@ import * as authActions from '../auth/store/auth.actions';
 })
 export class AuthService {
   userSubscription!: Subscription;
+  private _user: Usuario | null | undefined;
 
   constructor(
     private auth: AngularFireAuth,
@@ -45,9 +46,11 @@ export class AuthService {
           .valueChanges()
           .subscribe((fsUser) => {
             const user = Usuario.fromFirebase(fsUser);
+            this._user = user;
             this.store.dispatch(authActions.setUser({ user }));
           });
       } else {
+        this._user = null;
         this.userSubscription.unsubscribe();
         this.store.dispatch(authActions.unSetUser());
       }
@@ -56,5 +59,9 @@ export class AuthService {
 
   public isAuth(): Observable<boolean> {
     return this.auth.authState.pipe(map((fbUser) => fbUser != null));
+  }
+
+  public get user() {
+    return this._user;
   }
 }
