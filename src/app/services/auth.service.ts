@@ -7,6 +7,7 @@ import { Usuario } from '../models/usuario.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import * as authActions from '../auth/store/auth.actions';
+import * as itemActions from '../ingreso-egreso/store/ingreso-egreso.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,7 @@ export class AuthService {
         this._user = null;
         this.userSubscription.unsubscribe();
         this.store.dispatch(authActions.unSetUser());
+        this.store.dispatch(itemActions.unSetItems());
       }
     });
   }
