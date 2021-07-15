@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ChartsModule } from 'ng2-charts';
 import { OrdenIngresoPipe } from './pipes/orden-ingreso-pipe.pipe';
 
 @NgModule({
@@ -49,6 +50,7 @@ import { OrdenIngresoPipe } from './pipes/orden-ingreso-pipe.pipe';
       logOnly: environment.production,
       autoPause: true,
     }),
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
