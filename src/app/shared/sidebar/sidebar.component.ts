@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 interface itemData {
   titulo: string;
@@ -12,7 +16,7 @@ interface itemData {
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   items: itemData[] = [
     {
       titulo: 'Dashboard',
@@ -31,10 +35,25 @@ export class SidebarComponent implements OnInit {
       icon: 'fa-sign-out-alt',
     },
   ];
+  userName: string | undefined = '';
+  userSubs!: Subscription;
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private store: Store<AppState>
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userSubs = this.store
+      .select('user')
+      .pipe(filter(({ user }) => user != null))
+      .subscribe(({ user }) => (this.userName = user?.nombre));
+  }
+
+  ngOnDestroy(): void {
+    this.userSubs.unsubscribe();
+  }
 
   public itemClick(tituloItem: any): void {
     switch (tituloItem) {
