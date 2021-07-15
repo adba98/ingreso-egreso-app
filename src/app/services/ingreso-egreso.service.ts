@@ -35,4 +35,11 @@ export class IngresoEgresoService {
         )
       );
   }
+
+  public borrarIngresoEgreso(uidItem: string | undefined): Promise<void> {
+    const uid = this.authService.user!.uid;
+    return this.firestore
+      .doc(`${uid}/ingresos-egresos/items/${uidItem}`)
+      .delete();
+  }
 }
