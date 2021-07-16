@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 
 import { DashboardComponent } from '../dashboard/dashboard.component';
-import { IngresoEgresoComponent } from './ingreso-egreso.component';
-import { EstadisticaComponent } from './estadistica/estadistica.component';
+import { DashboardRoutesModule } from '../dashboard/dashboard-routes.module';
 import { DetalleComponent } from './detalle/detalle.component';
+import { EstadisticaComponent } from './estadistica/estadistica.component';
+import { IngresoEgresoComponent } from './ingreso-egreso.component';
+import { ingresoEgresoReducer } from './store/ingreso-egreso.reducer';
 import { OrdenIngresoPipe } from '../pipes/orden-ingreso-pipe.pipe';
 import { SharedModule } from '../shared/shared.module';
-import { DashboardRoutesModule } from '../dashboard/dashboard-routes.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { DashboardRoutesModule } from '../dashboard/dashboard-routes.module';
     DashboardRoutesModule,
     ReactiveFormsModule,
     SharedModule,
+    StoreModule.forFeature('ingresosEgresos', ingresoEgresoReducer),
   ],
 })
 export class IngresoEgresoModule {}
